@@ -44,6 +44,8 @@ device/samsung/hawaii/rc/init.bt.rc:root/init.bt.rc	\
 device/samsung/hawaii/rc/init.bcm2166x.usb.rc:root/init.bcm2166x.usb.rc\
 device/samsung/hawaii/fstab.hawaii_ss_kyleve:root/fstab.hawaii_ss_kyleve
 
+PRODUCT_COPY_FILES += \
+        device/samsung/hawaii/vold.fstab:system/etc/vold.fstab
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
@@ -52,7 +54,27 @@ PRODUCT_COPY_FILES += \
         device/samsung/hawaii/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 		device/samsung/hawaii/qwerty.kl:system/usr/keylayout/qwerty.kl \
 		device/samsung/hawaii/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl
-		
+
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+        make_ext4fs \
+        setup_fs
+
+PRODUCT_PACKAGES += \
+	e2fsck \
+	libexifa \
+	libjpega \
+	libkeyutils \
+	audio.a2dp.default \
+	libasound \
+    libasound_module_pcm_bcmfilter \
+	bcm_dut
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0 \
+    mobiledata.interfaces=rmnet0 \
+    ro.telephony.ril_class=SamsungBCMRIL
+	
 # Charger
 PRODUCT_PACKAGES += \
         charger \

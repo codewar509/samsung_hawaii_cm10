@@ -19,10 +19,12 @@ BOARD_KERNEL_BASE := 0x82000000
 BOARD_KERNEL_PAGESIZE := 4096
 
 # Bluetooth
-#BOARD_HAVE_BLUETOOTH := true
-#BOARD_HAVE_BLUETOOTH_BCM := true
-# Wi-Fi Tethering
-#BOARD_HAVE_SAMSUNG_WIFI := true
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
+
+OPENSOURCE_ALSA_AUDIO := true
+BOARD_USES_ALSA_AUDIO := true
+BRCM_ALSA_LIB_DIR=device/samsung/bcm_common/alsa-lib
 
 # Hardware rendering
 USE_OPENGL_RENDERER := true
@@ -34,12 +36,6 @@ BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 
-#Device Partition INFO
-#BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x12C00000
-#BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x0AF00000
-#BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00C00000
-#BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00C00000
-#BOARD_FLASH_BLOCK_SIZE := 0x00020000
 TARGET_USERIMAGES_USE_EXT4 := true
 
 BOARD_CACHE_DEVICE := /dev/block/mmcblk0p16
@@ -79,13 +75,13 @@ TARGET_RECOVERY_FSTAB := device/samsung/hawaii/recovery/recovery.fstab
 #BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/hawaii/recovery/graphics.c
 
 # Connectivity - Wi-Fi
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-WPA_SUPPLICANT_VERSION      := VER_0_8_X
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-BOARD_HOSTAPD_DRIVER        := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
-BOARD_WLAN_DEVICE           := bcmdhd
-BOARD_WLAN_DEVICE_REV       := bcm4330
+#BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+#WPA_SUPPLICANT_VERSION      := VER_0_8_X
+#BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
+#BOARD_HOSTAPD_DRIVER        := NL80211
+#BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
+#BOARD_WLAN_DEVICE           := bcmdhd
+#BOARD_WLAN_DEVICE_REV       := bcm4330
 WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/dhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA     := "/system/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/system/etc/wifi/bcmdhd_apsta.bin"
@@ -94,3 +90,11 @@ WIFI_DRIVER_MODULE_NAME     := "wlan0"
 WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_DRIVER_MODULE_AP_ARG   := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                   := 802_11_ABG
+
+# Wi-Fi Tethering
+BOARD_HAVE_SAMSUNG_WIFI := true
+BOARD_LEGACY_NL80211_STA_EVENTS := true
+BOARD_NO_APSME_ATTR := true
+
+BOARD_RIL_CLASS := ../../../device/samsung/hawaii/ril/
+
