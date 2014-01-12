@@ -34,6 +34,7 @@ on early-init
     mkdir /preload 0771 system system 
 
 on init
+	stop ril-daemon
 
 on post-fs-data
 # we will remap this as /storage/sdcard with the sdcard fuse tool
@@ -50,6 +51,10 @@ on post-fs-data
 	#wifi system
     mkdir /data/misc/wifi 0775 wifi wifi			
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/radio 0775 radio system
+    # give system access to wpa_supplicant.conf for backup and restore
+    mkdir /data/misc/wifi 0770 wifi system
+    chmod 0660 /data/misc/wifi/wpa_supplicant.conf
     mkdir /data/misc/dhcp 0775 dhcp dhcp
     mkdir /system/etc/wifi 0775 wifi wifi
     chown system system /efs/wifi/.mac.info
@@ -243,31 +248,31 @@ chown system system /sys/kernel/sysrpc/mtest
     setprop fb.force.dithering 1
 
 # permissions for gps.
-	mkdir /data/gps 0770 radio system
-	chown radio system /data/gps
+	mkdir /data/gps 0770 gps system
+	chown gps system /data/gps
 	chmod 0770 /data/gps
 	chmod 0660 /data/system
-	chown radio system /system/etc/gps/glconfig.xml
+	chown gps system /system/etc/gps/glconfig.xml
 	chmod 0660 /system/etc/gps/glconfig.xml
-	chown radio system /system/etc/gps
+	chown gps system /system/etc/gps
 
 	chmod 0770 /system/etc/gps
-	chown radio system /system/bin/glgps
+	chown gps system /system/bin/glgps
 	chmod 0770 /system/bin/glgps
 
-	chown radio system /system/bin/gpslogd
+	chown gps system /system/bin/gpslogd
 	chmod 0777 /system/bin/gpslogd
 
     write /sys/class/gpio/export 23
-    chown radio system /sys/class/gpio/gpio23/value
-    chown radio system /sys/class/gpio/gpio23/direction
+    chown gps system /sys/class/gpio/gpio23/value
+    chown gps system /sys/class/gpio/gpio23/direction
     write /sys/class/gpio/gpio23/direction out
     write /sys/class/gpio/gpio23/value 0
 
     chmod 0660 /dev/bcm_gps
     chown radio radio /dev/bcm_gps
 
-    chown radio system /dev/bcm_gps_ctl
+    chown gps system /dev/bcm_gps_ctl
     chmod 0660 /dev/bcm_gps_ctl
 
 #permissions for sensors
@@ -294,7 +299,7 @@ chown system system /sys/class/input/event1/device/light_poll_delay
 chmod 0666 /sys/class/input/event1/device/prox_poll_delay
 chmod 0666 /sys/class/input/event1/device/light_poll_delay
 
-    chown radio system /dev/ttyS1
+    chown gps system /dev/ttyS1
     chmod 0660 /dev/ttyS1
 
 #for bluetooth. permission for host interface
@@ -554,7 +559,7 @@ on property:init.svc.macloader=stopped
 
 service gpsd /system/bin/glgps -c /system/etc/gps/glconfig.xml
     class late_start
-    user radio
+    user gps
     group system root inet radio wifi sdcard_rw
 
 # Run ATX over UART

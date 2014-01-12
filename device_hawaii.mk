@@ -27,15 +27,11 @@ PRODUCT_DEVICE := kyleve
 PRODUCT_COPY_FILES += \
 device/samsung/hawaii/recovery/recovery:/recovery/root/sbin/recovery \
 device/samsung/hawaii/recovery/ueventd:/recovery/root/sbin/ueventd \
-device/samsung/hawaii/recovery/ueventd.goldfish.rc:/recovery/root/ueventd.goldfish.rc \
-device/samsung/hawaii/recovery/ueventd.rc:/recovery/root/ueventd.rc \
 device/samsung/hawaii/recovery/ueventd.hawaii_ss_kyleve.rc:/recovery/root/ueventd.hawaii_ss_kyleve.rc 
 
 # Init files
 PRODUCT_COPY_FILES += \
-device/samsung/hawaii/rc/ueventd.rc:root/ueventd.rc \
 device/samsung/hawaii/rc/ueventd.hawaii_ss_kyleve.rc:root/ueventd.hawaii_ss_kyleve.rc	\
-device/samsung/hawaii/rc/ueventd.goldfish.rc:root/ueventd.goldfish.rc	\
 device/samsung/hawaii/rc/lpm.rc:root/lpm.rc	\
 device/samsung/hawaii/rc/init.usb.rc:root/init.usb.rc	\
 device/samsung/hawaii/rc/init.trace.rc:root/init.trace.rc	\
@@ -71,9 +67,9 @@ PRODUCT_PACKAGES += \
 	bcm_dut
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0 \
-    mobiledata.interfaces=rmnet0 \
-    ro.telephony.ril_class=SamsungBCMRIL
+	wifi.interface=wlan0 \
+	mobiledata.interfaces=rmnet0 \
+
 	
 # Charger
 PRODUCT_PACKAGES += \

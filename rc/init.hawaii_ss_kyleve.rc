@@ -34,6 +34,7 @@ on early-init
     mkdir /preload 0771 system system 
 
 on init
+	#stop ril-daemon
 
 on post-fs-data
 # we will remap this as /storage/sdcard with the sdcard fuse tool
@@ -47,13 +48,18 @@ on post-fs-data
     mkdir /efs/wifi 0775 radio system
     mkdir /efs/bluetooth 0775 radio system
     mkdir /efs/imei 0775 radio system
-    mkdir /data/misc/wifi 0775 wifi system
+	#wifi system
+    mkdir /data/misc/wifi 0775 wifi wifi			
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/radio 0775 radio system
+    # give system access to wpa_supplicant.conf for backup and restore
+    mkdir /data/misc/wifi 0770 wifi system
+    chmod 0660 /data/misc/wifi/wpa_supplicant.conf
     mkdir /data/misc/dhcp 0775 dhcp dhcp
     mkdir /system/etc/wifi 0775 wifi wifi
     chown system system /efs/wifi/.mac.info
     chmod 0664 /efs/wifi/.mac.info
-    chown system system /efs/imei/.nvmac.info
+    chown radio system /efs/imei/.nvmac.info
     chmod 0664 /efs/imei/.nvmac.info
 
     # for TRP/TIS

@@ -80,8 +80,8 @@ TARGET_RECOVERY_FSTAB := device/samsung/hawaii/recovery/recovery.fstab
 #BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 #BOARD_HOSTAPD_DRIVER        := NL80211
 #BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
-#BOARD_WLAN_DEVICE           := bcmdhd
-#BOARD_WLAN_DEVICE_REV       := bcm4330
+BOARD_WLAN_DEVICE           := bcmdhd
+BOARD_WLAN_DEVICE_REV       := bcm4330
 WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/dhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA     := "/system/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/system/etc/wifi/bcmdhd_apsta.bin"
@@ -96,5 +96,5 @@ BOARD_HAVE_SAMSUNG_WIFI := true
 BOARD_LEGACY_NL80211_STA_EVENTS := true
 BOARD_NO_APSME_ATTR := true
 
-BOARD_RIL_CLASS := ../../../device/samsung/hawaii/ril/
+#BOARD_RIL_CLASS := ../../../device/samsung/hawaii/ril/
 
