@@ -96,5 +96,5 @@ BOARD_HAVE_SAMSUNG_WIFI := true
 BOARD_LEGACY_NL80211_STA_EVENTS := true
 BOARD_NO_APSME_ATTR := true
 
-#BOARD_RIL_CLASS := ../../../device/samsung/hawaii/ril/
+BOARD_RIL_CLASS := ../../../device/samsung/hawaii/ril/com/android/internal/telephony/SamsungBCMRIL.java
 
